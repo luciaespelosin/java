@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.io.Serial;
 import universidad.excepciones.*;
 
-public class Asignatura implements Serializable {
+public abstract class Asignatura implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     private String codigo;
@@ -79,18 +79,6 @@ public class Asignatura implements Serializable {
     public String toString() {
         return "[" + codigo + "] " + nombre + " - " + categoria;
     }
-    public double porcentajeHabilitacion() {
-        return switch (this.getCategoria()) {
-            case OBLIGATORIA -> 60.0;
-            case OPTATIVA -> 50.0;
-            case PASANTIA, TESIS -> 75.0;
-        };
-    }
-    public double porcentajePromocion() {
-        return switch (this.getCategoria()) {
-            case OBLIGATORIA -> 80.0;
-            case OPTATIVA -> 60.0;
-            default -> -1.0; //el caso default cubre las otras categoría
-        };
-    }
+    public abstract double porcentajeHabilitacion(); // abstracta
+    public abstract double porcentajePromocion(); // abstracta
 }
