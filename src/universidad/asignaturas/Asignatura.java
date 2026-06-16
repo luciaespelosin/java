@@ -1,8 +1,10 @@
 package universidad.asignaturas;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.io.Serial;
 import universidad.excepciones.*;
+import java.util.Objects;
 
 public abstract class Asignatura implements Serializable {
     @Serial
@@ -63,21 +65,24 @@ public abstract class Asignatura implements Serializable {
     public boolean isPromocional() { 
         return promocional; 
     }
-    public void setPromocional(boolean promocional) { 
-        this.promocional = promocional; 
-    }
     public CategoriaAsignatura getCategoria() { 
         return categoria; 
-    }
-    public void setCategoria(CategoriaAsignatura categoria) { 
-        if (categoria == null) {
-            throw new ParametroNuloException("La categoría no puede ser nula");
-        }
-        this.categoria = categoria; 
     }
     @Override
     public String toString() {
         return "[" + codigo + "] " + nombre + " - " + categoria;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Asignatura otra = (Asignatura) o;
+        return this.codigo.equalsIgnoreCase(otra.codigo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigo != null ? codigo.toLowerCase() : null);
     }
     public abstract double porcentajeHabilitacion(); // abstracta
     public abstract double porcentajePromocion(); // abstracta
