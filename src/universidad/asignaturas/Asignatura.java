@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.io.Serial;
 import universidad.excepciones.*;
-import java.util.Objects;
 
 public abstract class Asignatura implements Serializable {
     @Serial
@@ -12,8 +11,8 @@ public abstract class Asignatura implements Serializable {
     private String codigo;
     private String nombre;
     private int cuatrimestre;
-    private boolean promocional;
-    private CategoriaAsignatura categoria; 
+    private final boolean promocional;
+    private final CategoriaAsignatura categoria; 
 
     public Asignatura(String codigo, String nombre, int cuatrimestre, boolean promocional, CategoriaAsignatura categoria) {
         if (cuatrimestre < 1 || cuatrimestre > 10) {
